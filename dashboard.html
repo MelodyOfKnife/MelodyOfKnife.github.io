@@ -23,6 +23,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<!--begin::Web font -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
 		<script>
           WebFont.load({
@@ -3043,78 +3044,138 @@ License: You must have a valid license purchased only from themeforest(the above
 					<!-- END: Subheader -->
 					<div class="m-content">
 						<div class="row m-row--no-padding m-row--col-separator-xl">
-							<div class="col-md-12 col-lg-6 col-xl-3" style="margin-bottom: 20px;">
-								<div class="m-widget24">
-									<h3 class="m-widget24__title">
-										Travel in thai embarkment !
-									</h3>
-									<a href="tourpr.html">
-										<img class="tourpr" src="assets/app/media/img/tourpr.jpg" width=100%>
-									</a>
-								</div>
-							</div>
 							<div class="col-md-12 col-lg-6 col-xl-3" style="background: white; margin-bottom: 20px;">
-								<!--begin::New Feedbacks-->
-								<div class="m-widget24">
-									<div class="m-widget24__item">
-										<h4 class="m-widget24__title">
-											Your ECO Points
-										</h4>
-										<br>
-										<span class="m-widget24__desc">
-											To get reward
-										</span>
-										<span class="m-widget24__stats m--font-info">
-											1349
-										</span>
-										<div class="m--space-10"></div>
-										<div class="progress m-progress--sm">
-											<div class="progress-bar m--bg-info" role="progressbar" style="width: 84%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-										</div>
-										<span class="m-widget24__change">
-											Progress
-										</span>
-										<span class="m-widget24__number">
-											84%
-										</span>
-									</div>
-								</div>
-								<!--end::New Feedbacks-->
-							</div>
-
-							<div class="col-md-12 col-lg-6 col-xl-3" style="background: white;">
-									<!--begin::New Feedbacks-->
-									<div class="m-widget24">
-										<div class="m-widget24__item">
-											<h4 class="m-widget24__title">
-												Are you an eco traveller.
-											</h4>
-											<br>
-											<span class="m-widget24__desc">
-												If yes, you allow us to apply our AI
-											</span>
-											<br>
-											<span class="m-widget24__desc">
-												to do energy management in your room.
-											</span>
-											<br>
-											<br>
-											<div class="row" style="width: 100%; margin-left: 20px; margin-bottom: 20px;">
-												<div class="col-6-sm" style="width: 30%;">
-													<a href="user-dashboard" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom">
-														Yes
-													</a>
-												</div>
-												<div class="col-6-sm" style="width: 50%;">
-													<a href="user-dashboard" class="btn m-btn--pill m-btn--air btn-danger m-btn m-btn--custom">
-														No
-													</a>
-												</div>
+								<div class="m-widget1">
+									<div class="m-widget1__item">
+										<div class="row m-row--no-padding align-items-center">
+											<div class="col">
+												<h3 class="m-widget1__title">
+													Room Temp
+												</h3>
+												<span class="m-widget1__desc">
+													Degree celcius
+												</span>
+											</div>
+											<div class="col m--align-right">
+												<span id="room-temp" class="m-widget1__number m--font-warning">
+													
+												</span>
 											</div>
 										</div>
 									</div>
-									<!--end::New Feedbacks-->
+									<div class="m-widget1__item">
+											<div class="row m-row--no-padding align-items-center">
+												<div class="col">
+													<h3 class="m-widget1__title">
+														Aircon Temp
+													</h3>
+													<span class="m-widget1__desc">
+														Degree celcius
+													</span>
+												</div>
+												<div class="col m--align-right">
+													<span id="air-temp" class="m-widget1__number m--font-warning">
+														
+													</span>
+												</div>
+											</div>
+										</div>
+									<div class="m-widget1__item">
+										<div class="row m-row--no-padding align-items-center">
+											<div class="col">
+												<h3 class="m-widget1__title">
+													Humidity
+												</h3>
+												<span class="m-widget1__desc">
+													
+												</span>
+											</div>
+											<div class="col m--align-right">
+												<span id="humid" class="m-widget1__number m--font-info">
+													68%
+												</span>
+											</div>
+										</div>
+									</div>
+									<div class="m-widget1__item">
+										<div class="row m-row--no-padding align-items-center">
+											<div class="col">
+												<h3 class="m-widget1__title">
+													Air quality
+												</h3>
+												<span class="m-widget1__desc">
+													Condition of air
+												</span>
+											</div>
+											<div class="col m--align-right">
+												<span id="air-qual" class="m-widget1__number m--font-success">
+													Excellent
+												</span>
+											</div>
+										</div>
+									</div>
 								</div>
+							</div>
+
+							<div class="col-md-12 col-lg-6 col-xl-3" style="background: white; margin-bottom: 20px;">
+								<div class="m-widget1">
+									<div class="m-widget1__item">
+										<div class="row m-row--no-padding align-items-center">
+											<div class="col">
+												<h3 class="m-widget1__title">
+													Temp control
+												</h3>
+												<span class="m-widget1__desc">
+													Control air conndition temperature
+												</span>
+											</div>
+											<div class="col m--align-right">
+												<span class="m-widget1__number m--font-success">
+													<button onclick="dectemp()" class="btn btn-info">Down</button>
+													<button onclick="inctemp()" class="btn btn-danger">Up</button>
+												</span>
+											</div>
+											<script>
+												var airtemp = 25;
+												$("#air-temp").html(airtemp+'\'')
+												$("#room-temp").html(25+'\'')
+												function inctemp(){
+													$.get("https://ae95be6f.ngrok.io/api/v2.0/tempup/")
+													airtemp += 1;
+													$("#air-temp").html(airtemp+'\'')
+												}
+
+												function dectemp(){
+													$.get("https://ae95be6f.ngrok.io/api/v2.0/tempdown/")
+													airtemp -= 1;
+													$("#air-temp").html(airtemp+'\'')
+												}
+
+												function updatenv(){
+													// $.ajax({
+													// 	crossOrigin: true,
+													// 	url: "http://ae95be6f.ngrok.io/getenv/",
+													// 	success: function(data) {
+													// 		// $( '#test' ).html(data);
+													// 	},
+													// });
+													$.post("http://ae95be6f.ngrok.io/api/v2.0/getenv/",
+													crossOrigin= false,
+													success=function(d){
+														console.log(d)
+													})
+												}
+												// updatenv()
+
+												setInterval(function(){
+													$("#room-temp").html((parseInt(Math.random()*4-2)+24)+'\'')
+													$("#humid").html((parseInt(Math.random()*4-2)+65)+'%')
+												}, 5000)
+											</script>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
