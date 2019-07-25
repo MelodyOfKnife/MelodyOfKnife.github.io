@@ -65,38 +65,38 @@ var SnippetLogin = function() {
 
     var handleSignInFormSubmit = function() {
         $('#m_login_signin_submit').click(function(e) {
-            e.preventDefault();
-            var btn = $(this);
-            var form = $(this).closest('form');
+            // e.preventDefault();
+            // var btn = $(this);
+            // var form = $(this).closest('form');
 
-            form.validate({
-                rules: {
-                    email: {
-                        required: true,
-                        email: true
-                    },
-                    password: {
-                        required: true
-                    }
-                }
-            });
+            // form.validate({
+            //     rules: {
+            //         email: {
+            //             required: true,
+            //             email: true
+            //         },
+            //         password: {
+            //             required: true
+            //         }
+            //     }
+            // });
 
-            if (!form.valid()) {
-                return;
-            }
+            // if (!form.valid()) {
+            //     return;
+            // }
 
-            btn.addClass('m-loader m-loader--right m-loader--light').attr('disabled', true);
+            // btn.addClass('m-loader m-loader--right m-loader--light').attr('disabled', true);
 
-            form.ajaxSubmit({
-                url: '',
-                success: function(response, status, xhr, $form) {
-                	// similate 2s delay
-                	setTimeout(function() {
-	                    btn.removeClass('m-loader m-loader--right m-loader--light').attr('disabled', false);
-	                    showErrorMsg(form, 'danger', 'Incorrect username or password. Please try again.');
-                    }, 2000);
-                }
-            });
+            // form.ajaxSubmit({
+            //     url: '',
+            //     success: function(response, status, xhr, $form) {
+            //     	// similate 2s delay
+            //     	setTimeout(function() {
+	        //             btn.removeClass('m-loader m-loader--right m-loader--light').attr('disabled', false);
+	        //             showErrorMsg(form, 'danger', 'Incorrect username or password. Please try again.');
+            //         }, 2000);
+            //     }
+            // });
         });
     }
 

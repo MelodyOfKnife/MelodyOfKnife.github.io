@@ -33960,3 +33960,8 @@ body.m-content--skin-light2 {
       text-align: center;
       float: none;
       margin: 0 auto; } }
+
+.tourpr:hover {
+  width: 105%;
+  margin-left: -2.5%;
+}
