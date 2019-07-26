@@ -3140,13 +3140,13 @@ License: You must have a valid license purchased only from themeforest(the above
 												$("#air-temp").html(airtemp+'\'')
 												$("#room-temp").html(25+'\'')
 												function inctemp(){
-													$.get("https://ae95be6f.ngrok.io/api/v2.0/tempup/")
+													$.get("https://10c7ceb6.ngrok.io/api/v2.0/tempup/")
 													airtemp += 1;
 													$("#air-temp").html(airtemp+'\'')
 												}
 
 												function dectemp(){
-													$.get("https://ae95be6f.ngrok.io/api/v2.0/tempdown/")
+													$.get("https://10c7ceb6.ngrok.io/api/v2.0/tempdown/")
 													airtemp -= 1;
 													$("#air-temp").html(airtemp+'\'')
 												}
@@ -3159,7 +3159,7 @@ License: You must have a valid license purchased only from themeforest(the above
 													// 		// $( '#test' ).html(data);
 													// 	},
 													// });
-													$.post("http://ae95be6f.ngrok.io/api/v2.0/getenv/",
+													$.post("https://10c7ceb6.ngrok.io/api/v2.0/getenv/",
 													crossOrigin= false,
 													success=function(d){
 														console.log(d)
