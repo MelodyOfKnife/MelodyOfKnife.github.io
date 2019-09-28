@@ -1760,6 +1760,63 @@ License: You must have a valid license purchased only from themeforest(the above
 										<!--end:: Widgets/Stats2-1 -->
 									</div>
 									<div class="col-xl-4">
+											<!--begin:: Widgets/Stats2-1 -->
+											<div class="m-widget1">
+												<div class="m-widget1__item">
+													<div class="row m-row--no-padding align-items-center">
+														<div class="col">
+															<h3 class="m-widget1__title">
+																My ECO Scores
+															</h3>
+															<span class="m-widget1__desc">
+	
+															</span>
+														</div>
+														<div class="col m--align-right">
+															<span class="m-widget1__number m--font-brand">
+																4297
+															</span>
+														</div>
+													</div>
+												</div>
+												<div class="m-widget1__item">
+													<div class="row m-row--no-padding align-items-center">
+														<div class="col">
+															<h3 class="m-widget1__title">
+																My Rank
+															</h3>
+															<span class="m-widget1__desc">
+	
+															</span>
+														</div>
+														<div class="col m--align-right">
+															<span class="m-widget1__number m--font-danger">
+																1200
+															</span>
+														</div>
+													</div>
+												</div>
+												<div class="m-widget1__item">
+													<div class="row m-row--no-padding align-items-center">
+														<div class="col">
+															<h3 class="m-widget1__title">
+																My Current Hotel
+															</h3>
+															<span class="m-widget1__desc">
+	
+															</span>
+														</div>
+														<div class="col m--align-right">
+															<span class="m-widget1__number m--font-success">
+																AltoHotel 
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!--end:: Widgets/Stats2-1 -->
+										</div>
+									<div class="col-xl-4">
 										<!--begin:: Widgets/Daily Sales-->
 										<div class="m-widget14">
 											<div class="m-widget14__header m--margin-bottom-30">
@@ -1841,22 +1898,22 @@ License: You must have a valid license purchased only from themeforest(the above
 										</div>
 										<!--end:: Widgets/Daily Sales-->
 									</div>
+									<div class="row" style="width: 100%;">
 									<div class="col-xl-4">
 										<!--begin:: Widgets/Profit Share-->
 										<div class="m-widget14">
 											<div class="m-widget14__header">
 												<h3 class="m-widget14__title">
-													Saving Electricity Rates
+													Global Saving Electricity Rates
 												</h3>
 												<span class="m-widget14__desc">
-													Saving Electricity Rates
+													Global Saving Electricity Rates
 												</span>
 											</div>
 											<div class="row  align-items-center">
 												<div class="col">
 													<div id="saving-rates" class="m-widget14__chart" style="height: 160px">
 														<div class="m-widget14__stat">
-															45
 														</div>
 													</div>
 												</div>
@@ -2001,10 +2058,170 @@ License: You must have a valid license purchased only from themeforest(the above
 										</div>
 										<!--end:: Widgets/Profit Share-->
 									</div>
+								<div class="col-xl-4">
+									<!--begin:: Widgets/Profit Share-->
+									<div class="m-widget14">
+										<div class="m-widget14__header">
+											<h3 class="m-widget14__title">
+												My Saving Electricity Rates
+											</h3>
+											<span class="m-widget14__desc">
+												In Percents
+											</span>
+										</div>
+										<div class="row  align-items-center">
+											<div class="col">
+												<div id="saving-rates2" class="m-widget14__chart" style="height: 160px">
+													<div class="m-widget14__stat">
+														
+													</div>
+												</div>
+											</div>
+											<script>
+												var profitShare = function() {
+													if ($('#saving-rates2').length == 0) {
+														return;
+													}
+
+													var chart = new Chartist.Pie('#saving-rates2', {
+														series: [{
+																value: 62,
+																className: 'custom',
+																meta: {
+																	color: mUtil.getColor('primary')
+																}
+															},
+															{
+																value: 50,
+																className: 'custom',
+																meta: {
+																	color: mUtil.getColor('warning')
+																}
+															},
+															{
+																value: 25,
+																className: 'custom',
+																meta: {
+																	color: mUtil.getColor('accent')
+																}
+															},
+															{
+																value: 15,
+																className: 'custom',
+																meta: {
+																	color: mUtil.getColor('success')
+																}
+															},
+															{
+																value: 60,
+																className: 'custom',
+																meta: {
+																	color: mUtil.getColor('danger')
+																}
+															}
+														],
+														labels: ['Light', "Aircon", "Kettle", "TV", "Plug"]
+													}, {
+														donut: true,
+														donutWidth: 17,
+														showLabel: false
+													});
+
+													chart.on('draw', function(data) {
+														if (data.type === 'slice') {
+															// Get the total path length in order to use for dash array animation
+															var pathLength = data.element._node.getTotalLength();
+
+															// Set a dasharray that matches the path length as prerequisite to animate dashoffset
+															data.element.attr({
+																'stroke-dasharray': pathLength + 'px ' + pathLength + 'px'
+															});
+
+															// Create animation definition while also assigning an ID to the animation for later sync usage
+															var animationDefinition = {
+																'stroke-dashoffset': {
+																	id: 'anim' + data.index,
+																	dur: 1000,
+																	from: -pathLength + 'px',
+																	to: '0px',
+																	easing: Chartist.Svg.Easing.easeOutQuint,
+																	// We need to use `fill: 'freeze'` otherwise our animation will fall back to initial (not visible)
+																	fill: 'freeze',
+																	'stroke': data.meta.color
+																}
+															};
+
+															// If this was not the first slice, we need to time the animation so that it uses the end sync event of the previous animation
+															if (data.index !== 0) {
+																animationDefinition['stroke-dashoffset'].begin = 'anim' + (data.index - 1) + '.end';
+															}
+
+															// We need to set an initial value before the animation starts as we are not in guided mode which would do that for us
+
+															data.element.attr({
+																'stroke-dashoffset': -pathLength + 'px',
+																'stroke': data.meta.color
+															});
+
+															// We can't use guided mode as the animations need to rely on setting begin manually
+															// See http://gionkunz.github.io/chartist-js/api-documentation.html#chartistsvg-function-animate
+															data.element.animate(animationDefinition, false);
+														}
+													});
+
+													// For the sake of the example we update the chart every time it's created with a delay of 8 seconds
+													chart.on('created', function() {
+														if (window.__anim21278907124) {
+															clearTimeout(window.__anim21278907124);
+															window.__anim21278907124 = null;
+														}
+														window.__anim21278907124 = setTimeout(chart.update.bind(chart), 15000);
+													});
+												}
+												profitShare();
+											</script>
+											<div class="col">
+												<div class="m-widget14__legends">
+													<div class="m-widget14__legend">
+														<span class="m-widget14__legend-bullet m--bg-primary"></span>
+														<span class="m-widget14__legend-text">
+																Light
+														</span>
+													</div>
+													<div class="m-widget14__legend">
+														<span class="m-widget14__legend-bullet m--bg-warning"></span>
+														<span class="m-widget14__legend-text">
+																Aircon
+														</span>
+													</div>
+													<div class="m-widget14__legend">
+														<span class="m-widget14__legend-bullet m--bg-brand"></span>
+														<span class="m-widget14__legend-text">
+																Kettle
+														</span>
+													</div>
+													<div class="m-widget14__legend">
+														<span class="m-widget14__legend-bullet m--bg-success"></span>
+														<span class="m-widget14__legend-text">
+																TV
+														</span>
+													</div>
+													<div class="m-widget14__legend">
+														<span class="m-widget14__legend-bullet m--bg-danger"></span>
+														<span class="m-widget14__legend-text">
+																Plug
+														</span>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!--end:: Widgets/Profit Share-->
 								</div>
 							</div>
 						</div>
 					</div>
+					<iframe style="width: 100%; height: 100vh" src="https://iot.app.initialstate.com/embed/#/tiles/bkt_zfmvth1k13u68xl"></iframe>
 					<div class="m_content">
 					<div class="row">
 						
@@ -2171,479 +2388,172 @@ License: You must have a valid license purchased only from themeforest(the above
 										</div>
 									</div>
 								</div>
-							</div>
+						</div>
 							<!--end:: Widgets/Support Tickets -->
 						</div>
-						<div class="col-xl-6">
-								<!--begin:: Widgets/Tasks -->
-								<div class="m-portlet m-portlet--full-height ">
-									<div class="m-portlet__head">
-										<div class="m-portlet__head-caption">
-											<div class="m-portlet__head-title">
-												<h3 class="m-portlet__head-text">
-													Events
-												</h3>
+						<div class="col-xl-6"> 
+									<div class="m-portlet m-portlet--full-height ">
+										<div class="m-portlet__head">
+											<div class="m-portlet__head-caption">
+												<div class="m-portlet__head-title">
+													<h3 class="m-portlet__head-text">
+														My Rank
+													</h3>
+												</div>
+											</div>
+											<div class="m-portlet__head-tools">
+												<ul class="m-portlet__nav">
+													<li class="m-portlet__nav-item m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push" data-dropdown-toggle="hover" aria-expanded="true">
+														<a href="#" class="m-portlet__nav-link m-portlet__nav-link--icon m-portlet__nav-link--icon-xl m-dropdown__toggle">
+															<i class="la la-ellipsis-h m--font-brand"></i>
+														</a>
+														<div class="m-dropdown__wrapper">
+															<span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
+															<div class="m-dropdown__inner">
+																<div class="m-dropdown__body">
+																	<div class="m-dropdown__content">
+																		<ul class="m-nav">
+																			<li class="m-nav__item">
+																				<a href="" class="m-nav__link">
+																					<i class="m-nav__link-icon flaticon-share"></i>
+																					<span class="m-nav__link-text">
+																						Activity
+																					</span>
+																				</a>
+																			</li>
+																			<li class="m-nav__item">
+																				<a href="" class="m-nav__link">
+																					<i class="m-nav__link-icon flaticon-chat-1"></i>
+																					<span class="m-nav__link-text">
+																						Messages
+																					</span>
+																				</a>
+																			</li>
+																			<li class="m-nav__item">
+																				<a href="" class="m-nav__link">
+																					<i class="m-nav__link-icon flaticon-info"></i>
+																					<span class="m-nav__link-text">
+																						FAQ
+																					</span>
+																				</a>
+																			</li>
+																			<li class="m-nav__item">
+																				<a href="" class="m-nav__link">
+																					<i class="m-nav__link-icon flaticon-lifebuoy"></i>
+																					<span class="m-nav__link-text">
+																						Support
+																					</span>
+																				</a>
+																			</li>
+																		</ul>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</li>
+												</ul>
 											</div>
 										</div>
-										<div class="m-portlet__head-tools">
-											<ul class="nav nav-pills nav-pills--brand m-nav-pills--align-right m-nav-pills--btn-pill m-nav-pills--btn-sm" role="tablist">
-												<li class="nav-item m-tabs__item">
-													<a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_widget2_tab1_content" role="tab">
-														Today
-													</a>
-												</li>
-												<li class="nav-item m-tabs__item">
-													<a class="nav-link m-tabs__link" data-toggle="tab" href="#m_widget2_tab2_content1" role="tab">
-														Week
-													</a>
-												</li>
-												<li class="nav-item m-tabs__item">
-													<a class="nav-link m-tabs__link" data-toggle="tab" href="#m_widget2_tab3_content1" role="tab">
-														Month
-													</a>
-												</li>
-											</ul>
-										</div>
-									</div>
-									<div class="m-portlet__body">
-										<div class="tab-content">
-											<div class="tab-pane active" id="m_widget2_tab1_content">
-												<div class="m-widget2">
-													<div class="m-widget2__item m-widget2__item--primary">
-														<div class="m-widget2__checkbox">
-															<label class="m-checkbox m-checkbox--solid m-checkbox--single m-checkbox--brand">
-																<input type="checkbox">
-																<span></span>
-															</label>
+										<div class="m-portlet__body">
+											<div class="m-widget3">
+												<div class="m-widget3__item">
+													<div class="m-widget3__header">
+														<div class="m-widget3__user-img">
+															<img class="m-widget3__img" src="assets/app/media/img/users/user1.jpg" alt="">
 														</div>
-														<div class="m-widget2__desc">
-															<span class="m-widget2__text">
-																Make Metronic Great  Again.Lorem Ipsum Amet
+														<div class="m-widget3__info">
+															<span class="m-widget3__username">
+																Pendin Sondas (4301 pt)
 															</span>
 															<br>
-															<span class="m-widget2__user-name">
-																<a href="#" class="m-widget2__link">
-																	By Bob
-																</a>
+															<span class="m-widget3__time">
+																Spain
 															</span>
 														</div>
-														<div class="m-widget2__actions">
-															<div class="m-widget2__actions-nav">
-																<div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push" data-dropdown-toggle="hover">
-																	<a href="#" class="m-dropdown__toggle">
-																		<i class="la la-ellipsis-h"></i>
-																	</a>
-																	<div class="m-dropdown__wrapper">
-																		<span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
-																		<div class="m-dropdown__inner">
-																			<div class="m-dropdown__body">
-																				<div class="m-dropdown__content">
-																					<ul class="m-nav">
-																						<li class="m-nav__item">
-																							<a href="" class="m-nav__link">
-																								<i class="m-nav__link-icon flaticon-share"></i>
-																								<span class="m-nav__link-text">
-																									Activity
-																								</span>
-																							</a>
-																						</li>
-																						<li class="m-nav__item">
-																							<a href="" class="m-nav__link">
-																								<i class="m-nav__link-icon flaticon-chat-1"></i>
-																								<span class="m-nav__link-text">
-																									Messages
-																								</span>
-																							</a>
-																						</li>
-																						<li class="m-nav__item">
-																							<a href="" class="m-nav__link">
-																								<i class="m-nav__link-icon flaticon-info"></i>
-																								<span class="m-nav__link-text">
-																									FAQ
-																								</span>
-																							</a>
-																						</li>
-																						<li class="m-nav__item">
-																							<a href="" class="m-nav__link">
-																								<i class="m-nav__link-icon flaticon-lifebuoy"></i>
-																								<span class="m-nav__link-text">
-																									Support
-																								</span>
-																							</a>
-																						</li>
-																					</ul>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
+														<span class="m-widget3__status">
+															1198
+														</span>
 													</div>
-													<div class="m-widget2__item m-widget2__item--warning">
-														<div class="m-widget2__checkbox">
-															<label class="m-checkbox m-checkbox--solid m-checkbox--single m-checkbox--brand">
-																<input type="checkbox">
-																<span></span>
-															</label>
+												</div>
+												<div class="m-widget3__item">
+													<div class="m-widget3__header">
+														<div class="m-widget3__user-img">
+															<img class="m-widget3__img" src="assets/app/media/img/users/user4.jpg" alt="">
 														</div>
-														<div class="m-widget2__desc">
-															<span class="m-widget2__text">
-																Prepare Docs For Metting On Monday
+														<div class="m-widget3__info">
+															<span class="m-widget3__username">
+																Tennor Davor (4298 pt)
 															</span>
 															<br>
-															<span class="m-widget2__user-name">
-																<a href="#" class="m-widget2__link">
-																	By Sean
-																</a>
+															<span class="m-widget3__time">
+																USA
 															</span>
 														</div>
-														<div class="m-widget2__actions">
-															<div class="m-widget2__actions-nav">
-																<div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push" data-dropdown-toggle="hover">
-																	<a href="#" class="m-dropdown__toggle">
-																		<i class="la la-ellipsis-h"></i>
-																	</a>
-																	<div class="m-dropdown__wrapper">
-																		<span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
-																		<div class="m-dropdown__inner">
-																			<div class="m-dropdown__body">
-																				<div class="m-dropdown__content">
-																					<ul class="m-nav">
-																						<li class="m-nav__item">
-																							<a href="" class="m-nav__link">
-																								<i class="m-nav__link-icon flaticon-share"></i>
-																								<span class="m-nav__link-text">
-																									Activity
-																								</span>
-																							</a>
-																						</li>
-																						<li class="m-nav__item">
-																							<a href="" class="m-nav__link">
-																								<i class="m-nav__link-icon flaticon-chat-1"></i>
-																								<span class="m-nav__link-text">
-																									Messages
-																								</span>
-																							</a>
-																						</li>
-																						<li class="m-nav__item">
-																							<a href="" class="m-nav__link">
-																								<i class="m-nav__link-icon flaticon-info"></i>
-																								<span class="m-nav__link-text">
-																									FAQ
-																								</span>
-																							</a>
-																						</li>
-																						<li class="m-nav__item">
-																							<a href="" class="m-nav__link">
-																								<i class="m-nav__link-icon flaticon-lifebuoy"></i>
-																								<span class="m-nav__link-text">
-																									Support
-																								</span>
-																							</a>
-																						</li>
-																					</ul>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
+														<span class="m-widget3__status">
+															1999
+														</span>
 													</div>
-													<div class="m-widget2__item m-widget2__item--brand">
-														<div class="m-widget2__checkbox">
-															<label class="m-checkbox m-checkbox--solid m-checkbox--single m-checkbox--brand">
-																<input type="checkbox">
-																<span></span>
-															</label>
+												</div>
+												<div class="m-widget3__item" style="background: #9af2ce;">
+													<div class="m-widget3__header">
+														<div class="m-widget3__user-img">
+															<img class="m-widget3__img" src="assets/app/media/img/users/user5.jpg" alt="">
 														</div>
-														<div class="m-widget2__desc">
-															<span class="m-widget2__text">
-																Make Widgets Great Again.Estudiat Communy Elit
+														<div class="m-widget3__info">
+															<span class="m-widget3__username">
+																Me (4297 pt)
 															</span>
 															<br>
-															<span class="m-widget2__user-name">
-																<a href="#" class="m-widget2__link">
-																	By Aziko
-																</a>
+															<span class="m-widget3__time">
+																Taiwan
 															</span>
 														</div>
-														<div class="m-widget2__actions">
-															<div class="m-widget2__actions-nav">
-																<div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push" data-dropdown-toggle="hover">
-																	<a href="#" class="m-dropdown__toggle">
-																		<i class="la la-ellipsis-h"></i>
-																	</a>
-																	<div class="m-dropdown__wrapper">
-																		<span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
-																		<div class="m-dropdown__inner">
-																			<div class="m-dropdown__body">
-																				<div class="m-dropdown__content">
-																					<ul class="m-nav">
-																						<li class="m-nav__item">
-																							<a href="" class="m-nav__link">
-																								<i class="m-nav__link-icon flaticon-share"></i>
-																								<span class="m-nav__link-text">
-																									Activity
-																								</span>
-																							</a>
-																						</li>
-																						<li class="m-nav__item">
-																							<a href="" class="m-nav__link">
-																								<i class="m-nav__link-icon flaticon-chat-1"></i>
-																								<span class="m-nav__link-text">
-																									Messages
-																								</span>
-																							</a>
-																						</li>
-																						<li class="m-nav__item">
-																							<a href="" class="m-nav__link">
-																								<i class="m-nav__link-icon flaticon-info"></i>
-																								<span class="m-nav__link-text">
-																									FAQ
-																								</span>
-																							</a>
-																						</li>
-																						<li class="m-nav__item">
-																							<a href="" class="m-nav__link">
-																								<i class="m-nav__link-icon flaticon-lifebuoy"></i>
-																								<span class="m-nav__link-text">
-																									Support
-																								</span>
-																							</a>
-																						</li>
-																					</ul>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
+														<span class="m-widget3__status" style="color: #000;">
+															2000
+														</span>
 													</div>
-													<div class="m-widget2__item m-widget2__item--success">
-														<div class="m-widget2__checkbox">
-															<label class="m-checkbox m-checkbox--solid m-checkbox--single m-checkbox--brand">
-																<input type="checkbox">
-																<span></span>
-															</label>
+												</div>
+												<div class="m-widget3__item">
+													<div class="m-widget3__header">
+														<div class="m-widget3__user-img">
+															<img class="m-widget3__img" src="assets/app/media/img/users/user1.jpg" alt="">
 														</div>
-														<div class="m-widget2__desc">
-															<span class="m-widget2__text">
-																Make Metronic Great Again.Lorem Ipsum
+														<div class="m-widget3__info">
+															<span class="m-widget3__username">
+																Hatjung Sonoko (4297 pt)
 															</span>
 															<br>
-															<span class="m-widget2__user-name">
-																<a href="#" class="m-widget2__link">
-																	By James
-																</a>
+															<span class="m-widget3__time">
+																Japan
 															</span>
 														</div>
-														<div class="m-widget2__actions">
-															<div class="m-widget2__actions-nav">
-																<div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push" data-dropdown-toggle="hover">
-																	<a href="#" class="m-dropdown__toggle">
-																		<i class="la la-ellipsis-h"></i>
-																	</a>
-																	<div class="m-dropdown__wrapper">
-																		<span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
-																		<div class="m-dropdown__inner">
-																			<div class="m-dropdown__body">
-																				<div class="m-dropdown__content">
-																					<ul class="m-nav">
-																						<li class="m-nav__item">
-																							<a href="" class="m-nav__link">
-																								<i class="m-nav__link-icon flaticon-share"></i>
-																								<span class="m-nav__link-text">
-																									Activity
-																								</span>
-																							</a>
-																						</li>
-																						<li class="m-nav__item">
-																							<a href="" class="m-nav__link">
-																								<i class="m-nav__link-icon flaticon-chat-1"></i>
-																								<span class="m-nav__link-text">
-																									Messages
-																								</span>
-																							</a>
-																						</li>
-																						<li class="m-nav__item">
-																							<a href="" class="m-nav__link">
-																								<i class="m-nav__link-icon flaticon-info"></i>
-																								<span class="m-nav__link-text">
-																									FAQ
-																								</span>
-																							</a>
-																						</li>
-																						<li class="m-nav__item">
-																							<a href="" class="m-nav__link">
-																								<i class="m-nav__link-icon flaticon-lifebuoy"></i>
-																								<span class="m-nav__link-text">
-																									Support
-																								</span>
-																							</a>
-																						</li>
-																					</ul>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
+														<span class="m-widget3__status">
+															2001
+														</span>
 													</div>
-													<div class="m-widget2__item m-widget2__item--danger">
-														<div class="m-widget2__checkbox">
-															<label class="m-checkbox m-checkbox--solid m-checkbox--single m-checkbox--brand">
-																<input type="checkbox">
-																<span></span>
-															</label>
+												</div>
+												<div class="m-widget3__item">
+													<div class="m-widget3__header">
+														<div class="m-widget3__user-img">
+															<img class="m-widget3__img" src="assets/app/media/img/users/user4.jpg" alt="">
 														</div>
-														<div class="m-widget2__desc">
-															<span class="m-widget2__text">
-																Completa Financial Report For Emirates Airlines
+														<div class="m-widget3__info">
+															<span class="m-widget3__username">
+																Delto Lobocos (4254 pt)
 															</span>
 															<br>
-															<span class="m-widget2__user-name">
-																<a href="#" class="m-widget2__link">
-																	By Bob
-																</a>
+															<span class="m-widget3__time">
+																Swiss
 															</span>
 														</div>
-														<div class="m-widget2__actions">
-															<div class="m-widget2__actions-nav">
-																<div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push" data-dropdown-toggle="hover">
-																	<a href="#" class="m-dropdown__toggle">
-																		<i class="la la-ellipsis-h"></i>
-																	</a>
-																	<div class="m-dropdown__wrapper">
-																		<span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
-																		<div class="m-dropdown__inner">
-																			<div class="m-dropdown__body">
-																				<div class="m-dropdown__content">
-																					<ul class="m-nav">
-																						<li class="m-nav__item">
-																							<a href="" class="m-nav__link">
-																								<i class="m-nav__link-icon flaticon-share"></i>
-																								<span class="m-nav__link-text">
-																									Activity
-																								</span>
-																							</a>
-																						</li>
-																						<li class="m-nav__item">
-																							<a href="" class="m-nav__link">
-																								<i class="m-nav__link-icon flaticon-chat-1"></i>
-																								<span class="m-nav__link-text">
-																									Messages
-																								</span>
-																							</a>
-																						</li>
-																						<li class="m-nav__item">
-																							<a href="" class="m-nav__link">
-																								<i class="m-nav__link-icon flaticon-info"></i>
-																								<span class="m-nav__link-text">
-																									FAQ
-																								</span>
-																							</a>
-																						</li>
-																						<li class="m-nav__item">
-																							<a href="" class="m-nav__link">
-																								<i class="m-nav__link-icon flaticon-lifebuoy"></i>
-																								<span class="m-nav__link-text">
-																									Support
-																								</span>
-																							</a>
-																						</li>
-																					</ul>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-													<div class="m-widget2__item m-widget2__item--info">
-														<div class="m-widget2__checkbox">
-															<label class="m-checkbox m-checkbox--solid m-checkbox--single m-checkbox--brand">
-																<input type="checkbox">
-																<span></span>
-															</label>
-														</div>
-														<div class="m-widget2__desc">
-															<span class="m-widget2__text">
-																Completa Financial Report For Emirates Airlines
-															</span>
-															<br>
-															<span class="m-widget2__user-name">
-																<a href="#" class="m-widget2__link">
-																	By Sean
-																</a>
-															</span>
-														</div>
-														<div class="m-widget2__actions">
-															<div class="m-widget2__actions-nav">
-																<div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push" data-dropdown-toggle="hover">
-																	<a href="#" class="m-dropdown__toggle">
-																		<i class="la la-ellipsis-h"></i>
-																	</a>
-																	<div class="m-dropdown__wrapper">
-																		<span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
-																		<div class="m-dropdown__inner">
-																			<div class="m-dropdown__body">
-																				<div class="m-dropdown__content">
-																					<ul class="m-nav">
-																						<li class="m-nav__item">
-																							<a href="" class="m-nav__link">
-																								<i class="m-nav__link-icon flaticon-share"></i>
-																								<span class="m-nav__link-text">
-																									Activity
-																								</span>
-																							</a>
-																						</li>
-																						<li class="m-nav__item">
-																							<a href="" class="m-nav__link">
-																								<i class="m-nav__link-icon flaticon-chat-1"></i>
-																								<span class="m-nav__link-text">
-																									Messages
-																								</span>
-																							</a>
-																						</li>
-																						<li class="m-nav__item">
-																							<a href="" class="m-nav__link">
-																								<i class="m-nav__link-icon flaticon-info"></i>
-																								<span class="m-nav__link-text">
-																									FAQ
-																								</span>
-																							</a>
-																						</li>
-																						<li class="m-nav__item">
-																							<a href="" class="m-nav__link">
-																								<i class="m-nav__link-icon flaticon-lifebuoy"></i>
-																								<span class="m-nav__link-text">
-																									Support
-																								</span>
-																							</a>
-																						</li>
-																					</ul>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
+														<span class="m-widget3__status">
+															2002
+														</span>
 													</div>
 												</div>
 											</div>
-											<div class="tab-pane" id="m_widget2_tab2_content"></div>
-											<div class="tab-pane" id="m_widget2_tab3_content"></div>
 										</div>
 									</div>
-								</div>
-								<!--end:: Widgets/Tasks -->
-							</div>
 						</div>
 					</div>
 					<div class="row">
